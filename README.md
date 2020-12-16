@@ -1,0 +1,2 @@
+# ProyectoTSIS20O
+EquipoTSISUAMI 
