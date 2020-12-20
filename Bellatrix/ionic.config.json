@@ -1,0 +1,7 @@
+{
+  "name": "Bellatrix",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
