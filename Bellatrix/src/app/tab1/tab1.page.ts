@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HttpService } from '../servicios/http.service';
 
 @Component({
   selector: 'app-tab1',
@@ -8,44 +9,30 @@ import { Component } from '@angular/core';
 export class Tab1Page {
 
   lista = [];
+  tipoActual = "";
 
-	constructor() {
-    	this.lista  = [
-			{
-				"nombre": "Ven aqui",
-				"artista": "Los Bunkers"
-			},
-			{
-				"nombre": "Cita en el quirofano",
-				"artista": "Pxndx"	
-			},
-			{
-				"nombre": "With or without you",
-				"artista": "U2"	
-			}
-		];
-
-		console.log(this.lista);
+	constructor(public http: HttpService) {
+    this.tipoActual = "Nombre";
+    this.cargarCanciones(this.tipoActual);
   	}
+
+    // Obtiene de la BD la lista ordenada por el tipo
+    cargarCanciones(tipo){
+      this.http.obtenerCanciones(tipo).subscribe(
+        (res: any) => {
+          this.lista = res.canciones;
+        },
+        (error) =>{
+          console.error(error);
+        }
+      );
+    }
 
   	// Barra de busqueda
   	buscar($event){
   		// Si no hay texto, muestra todo el playlist
   		if($event.target.value == ""){
-  			this.lista  = [
-				{
-					"nombre": "Ven aqui",
-					"artista": "Los Bunkers"
-				},
-				{
-					"nombre": "Cita en el quirofano",
-					"artista": "Pxndx"	
-				},
-				{
-					"nombre": "With or without you",
-					"artista": "U2"	
-				}
-			];
+  			this.cargarCanciones(this.tipoActual);
   		}else{ // Se muestran las coicidencias del texto
   			// LAS COINCIDENCIAS LAS OBENETEMOS DE LA CONSULTA DEL MONGO
 	  		this.lista = [
@@ -60,31 +47,10 @@ export class Tab1Page {
   	// Recibe el evento de seleccionar el ordenamiento
   	ordenarPor($event){
   		// LA ORDENACION SE REALIZA CON UNA CONSULTA DE MONGO
-  		switch ($event.target.value) {
-  			case "artista":
-  				this.porArtista();
-  				break;
-  			case "genero":
-  				this.porGenero();
-  				break;
-  			case "nombre":
-  				this.porNombre();
-  				break;
-  		}
-  	}
-  	porArtista(){
-  		console.log("Ordenando por artista");
-  	}
-
-  	porGenero(){
-  		console.log("Ordenando por genero");
-  	}
-
-  	porNombre(){
-  		console.log("Ordenando por nombre");
-  		//Prueba de actualizacion de la lista
-  		let nuevaLista = [this.lista[1], this.lista[0], this.lista[2]];
-  		this.lista = nuevaLista;
+      let tipo = $event.target.value;
+      tipo = tipo[0].toUpperCase() + tipo.slice(1);
+      this.tipoActual = tipo;
+  		this.cargarCanciones(tipo);
   	}
 
 }
