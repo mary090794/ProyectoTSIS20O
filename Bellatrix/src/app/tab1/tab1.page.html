@@ -25,7 +25,10 @@
 <!-- Item Dividers in a List -->
 <ion-list>  
   <ion-item href="#" *ngFor="let cancion of lista">
-    <ion-label>{{cancion.nombre}} - {{cancion.artista}}</ion-label>
+    <div>
+      <h5>{{cancion.nombre}} - {{cancion.genero}}</h5>
+      <ion-label>{{cancion.artista}}</ion-label>
+    </div>
   </ion-item>
 </ion-list>
 </ion-content>
