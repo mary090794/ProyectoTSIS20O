@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var app = express();
 
 // cargar archivos rutas
-var project_routes = require('./Rutas/Canciones_Rutas');
+var project_routes = require('./Rutas/Rutas');
 //var project_routes2 = require('./Rutas/Usuarios_Rutas');
 // middlewares
 app.use(bodyParser.urlencoded({extended:false}));
