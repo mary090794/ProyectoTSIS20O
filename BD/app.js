@@ -7,7 +7,7 @@ var app = express();
 
 // cargar archivos rutas
 var project_routes = require('./Rutas/Canciones_Rutas');
-
+//var project_routes2 = require('./Rutas/Usuarios_Rutas');
 // middlewares
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -23,7 +23,6 @@ app.use((req, res, next) => {
 
 // rutas
 app.use('/', project_routes); 	//se puede poner /api para tener una ruta con versiones
-
 
 // exportar
 module.exports = app;

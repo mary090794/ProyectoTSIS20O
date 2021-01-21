@@ -3,7 +3,7 @@
 'use strict'
 
 var Cancion = require('../Modelos/Cancion');
-var fs = require('fs');
+//var fs = require('fs');
 var path = require('path');
 
 var controller = {
