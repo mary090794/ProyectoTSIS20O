@@ -9,6 +9,30 @@ const routes: Routes = [
   {
     path: 'ajustes-cancion',
     loadChildren: () => import('./ajustes-cancion/ajustes-cancion.module').then( m => m.AjustesCancionPageModule)
+  },
+  {
+    path: 'principal',
+    loadChildren: () => import('./Admin/principal/principal.module').then( m => m.PrincipalPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./Admin/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'agregar-cancion',
+    loadChildren: () => import('./Admin/agregar-cancion/agregar-cancion.module').then( m => m.AgregarCancionPageModule)
+  },
+  {
+    path: 'previsualizacion',
+    loadChildren: () => import('./Admin/previsualizacion/previsualizacion.module').then( m => m.PrevisualizacionPageModule)
+  },
+  {
+    path: 'editar-cancion',
+    loadChildren: () => import('./Admin/editar-cancion/editar-cancion.module').then( m => m.EditarCancionPageModule)
+  },
+  {
+    path: 'deslizar',
+    loadChildren: () => import('./deslizar/deslizar.module').then( m => m.DeslizarPageModule)
   }
 ];
 @NgModule({

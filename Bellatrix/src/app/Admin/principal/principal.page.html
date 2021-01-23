@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+  	<ion-buttons slot="start">
+  		<ion-back-button
+        style="padding-left: .4em"
+        text=""
+        defaultHref="/"
+      ></ion-back-button>
+      </ion-buttons>
+    <ion-title>Administrador</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+	<h5 align="center">Nueva Canción</h5>
+	<ion-button expand="block" fill="outline" (click)="agregarCancion()">
+		<ion-icon name="add"></ion-icon>
+	</ion-button>
+
+	<br>
+	<h5 align="center">Tus repertorio</h5>
+	<ion-list>
+	  <ion-item-sliding *ngFor="let cancion of lista" #slidingItem>
+	    <ion-item>
+
+	      <div>
+	        <h5>
+	          {{cancion.nombre}} - {{cancion.genero}}
+	        </h5>
+	        <ion-label>{{cancion.artista}}</ion-label>
+	        
+	      </div>
+	    </ion-item>
+	    <ion-item-options side="start" (ionSwipe)="editar(cancion, slidingItem)">
+	      <ion-item-option (click)="editar(cancion, slidingItem)" color="medium">
+	        <ion-icon name="create"></ion-icon>
+	      </ion-item-option>
+	    </ion-item-options>
+
+	    <ion-item-options side="end">
+	      <ion-item-option (click)="borrar(cancion, slidingItem)" color="medium">
+	        <ion-icon name="trash"></ion-icon>
+	      </ion-item-option>
+	    </ion-item-options>
+
+	  </ion-item-sliding>
+	</ion-list>
+</ion-content>

@@ -1,20 +1,20 @@
 import { Component } from '@angular/core';
-import { HttpService } from '../servicios/http.service';
+import { HttpService } from '../../servicios/http.service';
+import { ReceiverService } from '../../servicios/receiver.service';
 import { NavController } from '@ionic/angular';
-import { ReceiverService } from '../servicios/receiver.service';
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  selector: 'app-principal',
+  templateUrl: './principal.page.html',
+  styleUrls: ['./principal.page.scss'],
 })
-export class Tab1Page {
+export class PrincipalPage {
 
-  lista = [];
+   lista = [];
   favoritos = []
   tipoActual = "";
 
-	constructor(public http: HttpService, private navCtrl: NavController, private receiber: ReceiverService) { 
+	constructor(public http: HttpService, private receiber: ReceiverService, private navCtrl: NavController) {
     this.tipoActual = "Nombre";
     this.cargarCanciones(this.tipoActual);    
   }
@@ -24,8 +24,8 @@ export class Tab1Page {
       this.http.obtenerCanciones(tipo).subscribe(
         (res: any) => {
           this.lista = res.canciones;
-          console.log(res.canciones)
-          this.favoritos.push(res.canciones[0]); // Cancion favorita de prueba
+          //console.log(res.canciones[0])
+          this.favoritos.push(res.canciones[5]); // Cancion favorita de prueba
         },
         (error) =>{
           console.error(error);
@@ -58,11 +58,19 @@ export class Tab1Page {
   		this.cargarCanciones(tipo);
   	}
 
-    // Agrega la cancion seleccionada a favoritos
-    agregarFavorito(cancion, slidingItem){
-      
-      console.log("Agregar a favoritos:" + cancion.nombre);
+    agregarCancion(){
+      this.navCtrl.navigateForward("agregar-cancion");
+    }
+
+    //
+    editar(cancion, slidingItem){
       slidingItem.close(); // Cierra el boton deslizable
+      this.receiber.sendListSource(cancion);
+      this.navCtrl.navigateForward("editar-cancion");
+    }
+
+    borrar(cancion, slidingItem){
+      console.log("Borrar:" + cancion.nombre);
     }
 
     // Para colocar icono de favorito
@@ -85,11 +93,7 @@ export class Tab1Page {
     }
 
 
-    mostrarAjustes(cancion){
-      this.receiber.sendListSource(cancion);
-      console.log("Enviando:");
-      console.log(cancion);
-      this.navCtrl.navigateForward("ajustes-cancion");
-    }
-
 }
+
+
+

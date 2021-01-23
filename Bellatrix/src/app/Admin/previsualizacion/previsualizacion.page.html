@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+  	<ion-buttons slot="start">
+  		<ion-back-button
+        style="padding-left: .4em"
+        text=""
+        defaultHref="/#/principal"
+      ></ion-back-button>
+      </ion-buttons>
+    <ion-title>Previsualización</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<p *ngFor="let frase of cancion">
+		{{frase.acorde}}{{frase.tono}}{{frase.variacion}}<br>
+		{{frase.letra}}
+	</p>
+
+  <ion-button expand="block" fill="outline" (click)="guardaDatos()">
+    Guardar
+  </ion-button>
+</ion-content>

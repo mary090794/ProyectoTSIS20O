@@ -23,31 +23,31 @@
 
 
 <!-- Item Dividers in a List -->
-<ion-list>
-  <ion-item-sliding *ngFor="let cancion of lista" #slidingItem>
-    <ion-item href="/#/ajustes-cancion">
+  <ion-list>
+    <ion-item-sliding *ngFor="let cancion of lista" #slidingItem>
+      <ion-item (click)="mostrarAjustes(cancion)">
 
-      <div>
-        <h5>
-          {{cancion.nombre}} - {{cancion.genero}}
-          <ion-icon name="star" side="end" *ngIf="esFavorito(cancion)"></ion-icon>
-        </h5>
-        <ion-label>{{cancion.artista}}</ion-label>
-        
-      </div>
-    </ion-item>
-    <ion-item-options side="start" (ionSwipe)="agregarFavorito(cancion, slidingItem)">
-      <ion-item-option (click)="agregarFavorito(cancion, slidingItem)" color="medium">
-        <ion-icon name="star-outline"></ion-icon>
-      </ion-item-option>
-    </ion-item-options>
+        <div>
+          <h5>
+            {{cancion.nombre}} - {{cancion.genero}}
+            <ion-icon name="star" side="end" *ngIf="esFavorito(cancion)"></ion-icon>
+          </h5>
+          <ion-label>{{cancion.artista}}</ion-label>
+          
+        </div>
+      </ion-item>
+      <ion-item-options side="start" (ionSwipe)="agregarFavorito(cancion, slidingItem)">
+        <ion-item-option (click)="agregarFavorito(cancion, slidingItem)" color="medium">
+          <ion-icon name="star-outline"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
 
-    <ion-item-options side="end" (ionSwipe)="agregarFavorito(cancion, slidingItem)">
-      <ion-item-option (click)="agregarFavorito(cancion, slidingItem)" color="medium">
-        <ion-icon name="star-outline"></ion-icon>
-      </ion-item-option>
-    </ion-item-options>
+      <ion-item-options side="end" (ionSwipe)="agregarFavorito(cancion, slidingItem)">
+        <ion-item-option (click)="agregarFavorito(cancion, slidingItem)" color="medium">
+          <ion-icon name="star-outline"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
 
-  </ion-item-sliding>
-</ion-list>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>

@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+  	<ion-buttons slot="start">
+  		<ion-back-button
+        style="padding-left: .4em"
+        text=""
+        defaultHref="/"
+      ></ion-back-button>
+      </ion-buttons>
+    <ion-title>{{cancion.nombre}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+	<ion-list>
+    
+      <ion-item *ngFor="let frase of cancion.contenido">
+
+        <div>
+          <h5>
+            {{frase.acorde}}{{frase.tono}}{{frase.variacion}}
+          </h5>
+          <ion-label>{{frase.letra}}</ion-label>
+          
+        </div>
+      </ion-item>
+
+  </ion-list>
+
+</ion-content>

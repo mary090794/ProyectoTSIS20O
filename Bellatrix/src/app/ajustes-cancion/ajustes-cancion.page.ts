@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpService } from '../servicios/http.service';
+import { NavController } from '@ionic/angular';
+import { ReceiverService } from '../servicios/receiver.service';
 
 @Component({
   selector: 'app-ajustes-cancion',
@@ -13,23 +15,31 @@ export class AjustesCancionPage {
   tipoActual = "";
   cancion = [];
 
-	constructor(public http: HttpService) {
-    this.tipoActual = "Nombre";
-    this.cargarCanciones(this.tipoActual);    
+  tempos = [];
+  tempo = 100;
+  shop;
+	constructor(public http: HttpService, private navCtrl: NavController, private receiber: ReceiverService) {
+    // Se recibe la cancion seleccionada
+    this.receiber.$getListSource.subscribe(list => { this.cancion = list; }).unsubscribe();
+    for (var i = 50; i < 140; i++) {
+      this.tempos.push(i);
+    }
   }
 
-    // Obtiene de la BD la lista ordenada por el tipo
-    cargarCanciones(tipo){
-      this.http.obtenerCanciones(tipo).subscribe(
-        (res: any) => {
-          this.lista = res.canciones;
-          this.cancion = res.canciones[0];
-        },
-        (error) =>{
-          console.error(error);
-        }
-      );
+
+  incrementaTempo() {
+    console.log("Incr");
+    this.tempo++;
+  }
+
+  decrementaTempo() {
+    console.log("Decr");
+    this.tempo--;
+  }
+
+
+
+    comenzar(){
+      this.navCtrl.navigateForward("deslizar");
     }
-
-
 }
