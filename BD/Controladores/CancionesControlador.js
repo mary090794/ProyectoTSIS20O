@@ -85,9 +85,9 @@ var controller = {
 		cancion.contenido = params.contenido;
 
 		cancion.save((err, projectStored) => {
-			if(err) return res.status(500).send({message: 'Error al guardar el cuestionario.'});
+			if(err) return res.status(500).send({message: 'Error al guardar la cancion.'});
 
-			if(!projectStored) return res.status(404).send({message: 'No se ha podido guardar el cuestionario.'});
+			if(!projectStored) return res.status(404).send({message: 'No se ha podido guardar la cancion.'});
 
 			return res.status(200).send({project: projectStored});
 		});
@@ -109,6 +109,23 @@ var controller = {
 			return res.status(200).send({project});
 
 		});
+	},
+
+	actualizarCancion: function(req, res){
+
+		var id = req.params.id;
+		var cancion = req.body;
+
+		Cancion.findByIdAndUpdate(id, cancion, {new:true}, (err, cancionEditada) => {
+			if(err) return res.status(500).send({message: 'Error al actualizar'});
+
+			if(!cancionEditada) return res.status(404).send({message: 'No existe la cancion'});
+
+			return res.status(200).send({
+				project: cancionEditada
+			});
+		});
+
 	},
 
 	borrarCancion: function(req, res){

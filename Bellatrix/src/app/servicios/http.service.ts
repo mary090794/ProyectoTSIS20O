@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Cancion } from '../Interfaces/Cancion';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
-	servidor = 'http://localhost:5000/'; // Local
-	//servidor = 'http://localhost:5000/'; // Internet
+	//servidor = 'http://localhost:5000/'; // Local
+	servidor = 'http://palancar.izt.uam.mx:4002/'; // Internet
+	//http://palancar.izt.uam.mx:4002/
 	constructor(public http: HttpClient) { }
 
 	// Obtiene las cancionres ordenadas respecto a un tipo
@@ -17,18 +19,20 @@ export class HttpService {
 
 	// Guarda una nueva cancion
 	guardarCancion(cancion){
-		console.log("1.")
-		console.log(cancion)
-		return this.http.post<any>(this.servidor + 'cancion', cancion);
+		return this.http.post<Cancion>(this.servidor + 'cancion', cancion);
 	}
 
 	// Obtiene la cancion con el id indicado
 	obtenerCancion(id){
 		//const path = this.pathGeneral + '/Cuestionario/' + id;
-    	return this.http.get<any>(this.servidor + 'cancion/' + id);
+    	return this.http.get<Cancion>(this.servidor + 'cancion/' + id);
+	}
+
+	editarCancion(id, cancion){
+	    return this.http.put<Cancion>(this.servidor + 'cancion/' + id, cancion);
 	}
 
 	eliminarCancion(id){
-		return this.http.delete<any>(this.servidor + 'cancion/' + id);
+		return this.http.delete<Cancion>(this.servidor + 'cancion/' + id);
 	}
 }

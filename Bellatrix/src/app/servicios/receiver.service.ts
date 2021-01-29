@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {  BehaviorSubject } from 'rxjs'; //
+import { Cancion } from '../Interfaces/Cancion';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class ReceiverService {
 
   constructor() { }
 
-  sendListSource(list: any[]){
+  sendListSource(list: Cancion[]){
     this.listSource.next(list);
   }
 }

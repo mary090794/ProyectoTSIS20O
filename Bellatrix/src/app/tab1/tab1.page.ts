@@ -23,9 +23,11 @@ export class Tab1Page {
     cargarCanciones(tipo){
       this.http.obtenerCanciones(tipo).subscribe(
         (res: any) => {
+
           this.lista = res.canciones;
           console.log(res.canciones)
           this.favoritos.push(res.canciones[0]); // Cancion favorita de prueba
+       
         },
         (error) =>{
           console.error(error);
@@ -86,9 +88,7 @@ export class Tab1Page {
 
 
     mostrarAjustes(cancion){
-      this.receiber.sendListSource(cancion);
-      console.log("Enviando:");
-      console.log(cancion);
+      this.receiber.sendListSource([cancion]);
       this.navCtrl.navigateForward("ajustes-cancion");
     }
 

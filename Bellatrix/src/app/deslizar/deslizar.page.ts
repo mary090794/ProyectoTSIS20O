@@ -11,7 +11,7 @@ export class DeslizarPage implements OnInit {
   constructor(private receiber: ReceiverService) { }
 
   ngOnInit() {
-  	this.receiber.$getListSource.subscribe(list => { this.cancion = list; }).unsubscribe();
+  	this.receiber.$getListSource.subscribe(list => { this.cancion = list[0]; }).unsubscribe();
   	console.log(this.cancion);
   }
 

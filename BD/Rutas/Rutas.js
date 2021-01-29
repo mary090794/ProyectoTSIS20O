@@ -15,7 +15,7 @@ router.get('/CancionesGenero',CancionesControlador.obtenerCancionesPorGenero); /
 router.get('/CancionesNombre',CancionesControlador.obtenerCancionesPorNombre); // obtiene todo ordenado
 router.post('/Cancion', CancionesControlador.guardarCancion); // guarda una cancion
 router.get('/Cancion/:id?',CancionesControlador.obtenerCancion); // obtiene uno por id
-
+router.put('/Cancion/:id', CancionesControlador.actualizarCancion);
 router.delete('/Cancion/:id?',CancionesControlador.borrarCancion); // elimina una cancion por id
 
 // Usuarios

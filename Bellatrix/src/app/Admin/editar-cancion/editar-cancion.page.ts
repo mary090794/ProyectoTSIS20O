@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReceiverService } from '../../servicios/receiver.service';
 import { NavController } from '@ionic/angular';
-
+import { Cancion } from '../../Interfaces/Cancion';
 @Component({
   selector: 'app-editar-cancion',
   templateUrl: './editar-cancion.page.html',
@@ -10,6 +10,9 @@ import { NavController } from '@ionic/angular';
 export class EditarCancionPage implements OnInit {
 
   constructor(private navCtrl: NavController, private receiber: ReceiverService) { }
+
+
+  prueba: Cancion;
 
   listaAcordes = [];
   tonos = [];
@@ -37,13 +40,15 @@ export class EditarCancionPage implements OnInit {
     console.log("Recibi:");
 
     console.log(this.cancion);
+    
     this.nombre = this.cancion.nombre;
     this.artista = this.cancion.artista;
     this.genero = this.cancion.genero;
     //this.tempo = this.cancion.tempo;
 
     this.letra = this.cancion.contenido;
-    
+    if(this.letra.length == 0)
+      this.indiceActual = 0;
 
   	this.listaAcordes = ["Do", "Re", "Mi", "Fa", "Sol", "La", "Si"];
   	this.tonos = ["", "#", "b"];
@@ -101,11 +106,12 @@ export class EditarCancionPage implements OnInit {
   }
 
   enviarDatosPrevisualizacion(nombre, artista, genero){
-    console.log(this.letra);
+    console.log(this.cancion._id);
     this.cancion.nombre = nombre;
     this.cancion.artista = artista;
     this.cancion.genero = genero;
     this.cancion.contenido = this.letra;
+
     this.receiber.sendListSource([this.cancion]);
 
     this.navCtrl.navigateForward("previsualizacion");

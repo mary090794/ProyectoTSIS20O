@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { ReceiverService } from '../../servicios/receiver.service';
+import { Cancion } from '../../Interfaces/Cancion';
 
 @Component({
   selector: 'app-agregar-cancion',
@@ -15,13 +16,14 @@ export class AgregarCancionPage implements OnInit {
   tonos = [];
   listaVariaciones = [];
 
-  cancion = {};
+  cancion: Cancion;
 
   letra = [];
 
   nombre = "";
   artista = "";
   genero = "";
+  tempo = "";
 
   indiceActual = -1;
   acordeActual = "";
@@ -101,16 +103,19 @@ export class AgregarCancionPage implements OnInit {
     this.variacioActual = "";
   }
 
-  enviarDatosPrevisualizacion(nombre, artista, genero){
+  enviarDatosPrevisualizacion(nombre, artista, genero, tempo){
+
     this.cancion = {
       "nombre": nombre,
       "artista": artista,
       "genero": genero,
+      "tempo": tempo,
       "contenido": this.letra
     }
-    console.log("envia cancion");
-    console.log(this.cancion);
+
     this.receiber.sendListSource([this.cancion]);
+
+    
     this.navCtrl.navigateForward("previsualizacion");
   }
 }
