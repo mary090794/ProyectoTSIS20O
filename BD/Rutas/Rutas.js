@@ -9,13 +9,16 @@ var UsuariosControlador =require('../Controladores/UsuariosControlador');
 var router = express.Router();
 
 router.get('/',CancionesControlador.home);
-//router.post('/Descarga', CancionesControlador.saveDescarga);
-router.get('/CancionesArtista',CancionesControlador.getCancionesPorArtista);
-router.get('/CancionesGenero',CancionesControlador.getCancionesPorGenero);
-router.get('/CancionesNombre',CancionesControlador.getCancionesPorNombre);
+// Canciones
+router.get('/CancionesArtista',CancionesControlador.obtenerCancionesPorArtista); // obtiene todo ordenado
+router.get('/CancionesGenero',CancionesControlador.obtenerCancionesPorGenero); // obtiene todo ordenado
+router.get('/CancionesNombre',CancionesControlador.obtenerCancionesPorNombre); // obtiene todo ordenado
+router.post('/Cancion', CancionesControlador.guardarCancion); // guarda una cancion
+router.get('/Cancion/:id?',CancionesControlador.obtenerCancion); // obtiene uno por id
 
+router.delete('/Cancion/:id?',CancionesControlador.borrarCancion); // elimina una cancion por id
+
+// Usuarios
 router.get('/Usuarios',UsuariosControlador.getUsuarios);
-
-// Servicios para las graficas
 
 module.exports = router;

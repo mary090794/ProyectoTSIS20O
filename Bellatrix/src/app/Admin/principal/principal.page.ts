@@ -19,6 +19,9 @@ export class PrincipalPage {
     this.cargarCanciones(this.tipoActual);    
   }
 
+  ionViewWillEnter() {
+    this.cargarCanciones("Nombre");
+  }
     // Obtiene de la BD la lista ordenada por el tipo
     cargarCanciones(tipo){
       this.http.obtenerCanciones(tipo).subscribe(
@@ -70,7 +73,17 @@ export class PrincipalPage {
     }
 
     borrar(cancion, slidingItem){
-      console.log("Borrar:" + cancion.nombre);
+      console.log("Borrar:" + cancion._id);
+
+      this.http.eliminarCancion(cancion._id).subscribe(
+        (res: any) => {console.log(res)
+        },
+        (error) =>{
+          console.error(error);
+        }
+      );
+
+      this.cargarCanciones(this.tipoActual);
     }
 
     // Para colocar icono de favorito

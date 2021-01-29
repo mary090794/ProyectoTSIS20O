@@ -19,6 +19,11 @@ export class EditarCancionPage implements OnInit {
 
   letra = [];
 
+  nombre = "";
+  artista = "";
+  genero = "";
+  //tempo = "";
+
   indiceActual = -1;
   acordeActual = "";
   tonoActual = "";
@@ -32,6 +37,10 @@ export class EditarCancionPage implements OnInit {
     console.log("Recibi:");
 
     console.log(this.cancion);
+    this.nombre = this.cancion.nombre;
+    this.artista = this.cancion.artista;
+    this.genero = this.cancion.genero;
+    //this.tempo = this.cancion.tempo;
 
     this.letra = this.cancion.contenido;
     
@@ -91,9 +100,13 @@ export class EditarCancionPage implements OnInit {
     this.tonoActual = "";
   }
 
-  enviarDatosPrevisualizacion(){
+  enviarDatosPrevisualizacion(nombre, artista, genero){
     console.log(this.letra);
-    this.receiber.sendListSource(this.letra);
+    this.cancion.nombre = nombre;
+    this.cancion.artista = artista;
+    this.cancion.genero = genero;
+    this.cancion.contenido = this.letra;
+    this.receiber.sendListSource([this.cancion]);
 
     this.navCtrl.navigateForward("previsualizacion");
   }

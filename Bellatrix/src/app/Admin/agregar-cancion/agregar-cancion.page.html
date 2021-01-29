@@ -13,6 +13,10 @@
 
 <ion-content>
 
+    <ion-input placeholder="Nombre" #nombreSel value={{nombre}}></ion-input>
+    <ion-input placeholder="Artista" #artistaSel value={{artista}}></ion-input>
+    <ion-input placeholder="Género" #generoSel value={{genero}}></ion-input>
+
 	 <ion-row style="border-bottom: groove;">
 	      <ion-col col-4>
 	      <ion-label >Acorde</ion-label>
@@ -104,7 +108,7 @@
     </ion-item-sliding>
   </ion-list>
 
-  <ion-button expand="block" fill="outline" (click)="enviarDatosPrevisualizacion()">
+  <ion-button expand="block" fill="outline" (click)="enviarDatosPrevisualizacion(nombreSel.value, artistaSel.value, generoSel.value)">
 		Previsualizar
 	</ion-button>
 

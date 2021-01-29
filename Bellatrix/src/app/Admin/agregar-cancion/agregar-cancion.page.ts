@@ -19,6 +19,10 @@ export class AgregarCancionPage implements OnInit {
 
   letra = [];
 
+  nombre = "";
+  artista = "";
+  genero = "";
+
   indiceActual = -1;
   acordeActual = "";
   tonoActual = "";
@@ -97,9 +101,16 @@ export class AgregarCancionPage implements OnInit {
     this.variacioActual = "";
   }
 
-  enviarDatosPrevisualizacion(){
-    console.log(this.letra);
-    this.receiber.sendListSource([this.letra]);
+  enviarDatosPrevisualizacion(nombre, artista, genero){
+    this.cancion = {
+      "nombre": nombre,
+      "artista": artista,
+      "genero": genero,
+      "contenido": this.letra
+    }
+    console.log("envia cancion");
+    console.log(this.cancion);
+    this.receiber.sendListSource([this.cancion]);
     this.navCtrl.navigateForward("previsualizacion");
   }
 }
