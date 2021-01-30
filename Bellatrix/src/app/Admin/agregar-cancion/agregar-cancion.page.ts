@@ -23,7 +23,7 @@ export class AgregarCancionPage implements OnInit {
   nombre = "";
   artista = "";
   genero = "";
-  tempo = "";
+  tempo = null;
 
   indiceActual = -1;
   acordeActual = "";

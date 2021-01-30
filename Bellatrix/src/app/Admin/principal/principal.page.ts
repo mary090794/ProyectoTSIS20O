@@ -10,7 +10,7 @@ import { NavController } from '@ionic/angular';
 })
 export class PrincipalPage {
 
-   lista = [];
+  lista = [];
   favoritos = []
   tipoActual = "";
 
@@ -22,13 +22,15 @@ export class PrincipalPage {
   ionViewWillEnter() {
     this.cargarCanciones("Nombre");
   }
+
+  ionViewDidEnter(){
+    this.cargarCanciones("Nombre");
+  }
     // Obtiene de la BD la lista ordenada por el tipo
     cargarCanciones(tipo){
       this.http.obtenerCanciones(tipo).subscribe(
         (res: any) => {
           this.lista = res.canciones;
-          //console.log(res.canciones[0])
-          this.favoritos.push(res.canciones[5]); // Cancion favorita de prueba
         },
         (error) =>{
           console.error(error);
@@ -82,7 +84,7 @@ export class PrincipalPage {
           console.error(error);
         }
       );
-
+      this.lista = [];
       this.cargarCanciones(this.tipoActual);
     }
 

@@ -12,7 +12,6 @@ export class Tab3Page {
 
 
   muestraLogin(){
-  	console.log("Muestrame");
   	this.navCtrl.navigateForward("login");
   }
 }
