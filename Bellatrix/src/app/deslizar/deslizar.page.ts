@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReceiverService } from '../servicios/receiver.service';
 import { ViewChild, AfterViewInit } from '@angular/core';
 //import { Slides } from 'ionic-angular';
-import { AfterViewInit, ViewChildren, ElementRef, QueryList, HostListener } from '@angular/core';
+import { ViewChildren, ElementRef, QueryList, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-deslizar',
