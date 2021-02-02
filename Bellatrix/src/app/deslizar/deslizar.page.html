@@ -7,31 +7,17 @@
         defaultHref="/"
       ></ion-back-button>
       </ion-buttons>
-    <!--ion-title>{{cancion.nombre}}</ion-title-->
+    <ion-title>{{cancion.nombre}} - {{cancion.artista}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-      <div class="frame" (scroll)="scrolled($event)" #scrollframe style="height:75%;width:100%;overflow:auto;border: solid;">
-        <div *ngFor="let frase of items" class="item" #item>
+      <div class="frame" #scrollframe style="height:75%;width:100%;overflow:auto;border: solid;scroll-behavior: smooth;">
+        <div *ngFor="let frase of cancion.contenido" class="item" #item>
           {{frase.acorde}}{{frase.tono}}{{frase.variacion}}<br>
           {{frase.letra}} <br><br>
         </div>
       </div>
-
-	<!--ion-list>
-      <ion-item *ngFor="let frase of cancion.contenido">
-
-        <div>
-          <h5>
-            {{frase.acorde}}{{frase.tono}}{{frase.variacion}}
-          </h5>
-          <ion-label>{{frase.letra}}</ion-label>
-          
-        </div>
-      </ion-item>
-
-  </ion-list-->
 
 </ion-content>

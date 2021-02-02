@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReceiverService } from '../servicios/receiver.service';
-import { ViewChild, AfterViewInit } from '@angular/core';
-//import { Slides } from 'ionic-angular';
+import { ViewChild } from '@angular/core';
 import { ViewChildren, ElementRef, QueryList, HostListener } from '@angular/core';
 
 @Component({
@@ -9,11 +8,35 @@ import { ViewChildren, ElementRef, QueryList, HostListener } from '@angular/core
   templateUrl: './deslizar.page.html',
   styleUrls: ['./deslizar.page.scss'],
 })
-export class DeslizarPage implements AfterViewInit {
-	@ViewChild('scrollframe', {static: false}) scrollFrame: ElementRef;
-	@ViewChildren('item') itemElements: QueryList<any>;
+export class DeslizarPage implements OnInit {
+  @ViewChild('scrollframe') private scrollContainer: ElementRef;
 
-  cancion;
+  cancion = {
+    "_id":"60109b9726a5d4624eca3c4c",
+    "nombre":"Amor amor","artista":"Josè Josè",
+    "genero":"Rock",
+    "tempo":120,
+    "contenido":[
+      {"indice":0,"acorde":"Sol","tono":"","variacion":"","letra":"Amor amor"},
+      {"indice":1,"acorde":"Mi","tono":"","variacion":"","letra":"Donde está el amor"},
+      {"indice":2,"acorde":"Fa","tono":"","variacion":"","letra":"Amor amor"},
+      {"indice":3,"acorde":"Fa","tono":"","variacion":"","letra":"Amor amor"},
+      {"indice":4,"acorde":"Fa","tono":"","variacion":"","letra":"Amor amor"},
+      {"indice":5,"acorde":"Fa","tono":"","variacion":"","letra":"Amor amor"},
+      {"indice":6,"acorde":"Fa","tono":"","variacion":"","letra":"Amor amor"},
+      {"indice":7,"acorde":"Fa","tono":"","variacion":"","letra":"Amor amor"},
+      {"indice":8,"acorde":"Fa","tono":"","variacion":"","letra":"Amor amor"},
+      {"indice":9,"acorde":"Fa","tono":"","variacion":"","letra":"Amor amor"},
+      {"indice":10,"acorde":"Fa","tono":"","variacion":"","letra":"Amor amor"},
+      {"indice":11,"acorde":"Fa","tono":"","variacion":"","letra":"Amor amor"},
+      {"indice":12,"acorde":"Fa","tono":"","variacion":"","letra":"Amor amor"},
+      {"indice":13,"acorde":"Fa","tono":"","variacion":"","letra":"Amor amor"},
+      {"indice":14,"acorde":"Fa","tono":"","variacion":"","letra":"Amor amor"},
+      {"indice":15,"acorde":"Fa","tono":"","variacion":"","letra":"Amor amor"},
+      {"indice":16,"acorde":"Fa","tono":"","variacion":"","letra":"Amor amor"}
+    ]
+  };
+
   constructor(private receiber: ReceiverService) {
   	this.receiber.$getListSource.subscribe(list => { this.cancion = list[0]; }).unsubscribe();
   }
@@ -21,88 +44,25 @@ export class DeslizarPage implements AfterViewInit {
   miArray = [1,2,3];
 
   private itemContainer: any;
-  private scrollContainer: any;
-  private items = [1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8];
+  private items = [];
   private isNearBottom = true;
 
-  /*ngOnInit() {
-  	this.cancion = {"nombre": ""};
-  	//this.receiber.$getListSource.subscribe(list => { this.cancion = list[0]; }).unsubscribe();
-  	//console.log(this.cancion);
 
-  	this.scrollContainer = this.scrollFrame.nativeElement;
-
-    this.itemElements.changes.subscribe(_ => this.onItemElementsChanged());    
-
-    // Add a new item every 2 seconds for demo purposes
-    setInterval(() => {
-      this.items.push({});
-    }, 2000);
-  }*/
-
-  ngAfterViewInit() {
-  	//this.cancion = {"nombre": ""};
-  	//this.receiber.$getListSource.subscribe(list => { this.cancion = list[0]; }).unsubscribe();
-  	console.log(this.cancion);
-
-  	this.scrollContainer = this.scrollFrame.nativeElement;
-
-    this.itemElements.changes.subscribe(_ => this.onItemElementsChanged());    
-
-    // Add a new item every 2 seconds for demo purposes
-    let i = 0;
-    setInterval(() => {
-      this.items.push(this.cancion.contenido[i]);
-      i++;
-    }, 1000);
-  }
-
-  private onItemElementsChanged(): void {
-    if (this.isNearBottom) {
-      this.scrollToBottom();
+   ngOnInit() {
+       setInterval(() => {
+          this.scrollToBottom();
+        }, 500);
     }
-  }
 
+
+  index = 1;
   private scrollToBottom(): void {
-    this.scrollContainer.scroll({
-      top: this.scrollContainer.scrollHeight,
-      left: 0,
-      behavior: 'smooth'
-    });
+    try {
+            this.scrollContainer.nativeElement.scrollTop = this.index;
+            this.index+=10;
+        } catch(err) {
+          console.log("Terminó");
+        }  
   }
-
-  private isUserNearBottom(): boolean {
-    const threshold = 50;
-    const position = this.scrollContainer.scrollTop + this.scrollContainer.offsetHeight;
-    const height = this.scrollContainer.scrollHeight;
-    return position > height - threshold;
-  }
-
-  scrolled(event: any): void {
-    this.isNearBottom = this.isUserNearBottom();
-  }
-  
-  // Uncomment these lines, you you need to scroll the full window.
-  // Make sure, to remove 'position: absolute;' from the CSS to test that behaviour.
-  /*
-  private scrollToBottom(): void {
-    window.scroll({
-      top: this.scrollContainer.scrollHeight,
-      left: 0,
-      behavior: 'smooth'
-    });
-  }
-
-  private isUserNearBottom(): boolean {
-    const threshold = 150;
-    const position = window.scrollY + window.innerHeight;
-    const height = document.body.scrollHeight;
-    return position > height - threshold;
-  }
-
-  @HostListener('window:scroll', ['$event'])
-  scrolled(event: any): void {
-    this.isNearBottom = this.isUserNearBottom();
-  }*/
 
 }
