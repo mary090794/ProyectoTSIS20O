@@ -19,6 +19,7 @@ export class PrevisualizacionPage implements OnInit {
     
     this.receiber.$getListSource.subscribe(lista => { 
       this.cancion = lista[0];
+      console.log(this.cancion);
       this.letra = this.cancion["contenido"];
     }).unsubscribe();
 
@@ -28,10 +29,8 @@ export class PrevisualizacionPage implements OnInit {
   }
 
   guardaDatos(){
-    console.log("ANTES:" + this.cancion["_id"]);
     if(this.cancion["_id"] == undefined){
-      console.log("Crea");
-      console.log("DESPUES:" + this.cancion["_id"]);
+      console.log(this.cancion);
       this.http.guardarCancion(this.cancion).subscribe(
         (res: any) => {
           console.log(res);
@@ -41,8 +40,6 @@ export class PrevisualizacionPage implements OnInit {
         }
       );
     }else{
-      console.log("Edita");
-      console.log("DESPUES:" + this.cancion["_id"]);
 
       this.http.editarCancion(this.cancion["_id"], this.cancion).subscribe(
         (res: any) => {
