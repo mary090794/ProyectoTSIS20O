@@ -20,5 +20,8 @@ router.delete('/Cancion/:id?',CancionesControlador.borrarCancion); // elimina un
 
 // Usuarios
 router.get('/Usuarios',UsuariosControlador.getUsuarios);
+router.post('/validausuario',UsuariosControlador.validaUsuario);
+router.post('/validausuarioR',UsuariosControlador.validaUsuarioR);
+router.post('/guardausuario',UsuariosControlador.guardaUsuario);
 
 module.exports = router;

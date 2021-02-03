@@ -33,7 +33,11 @@ const routes: Routes = [
   {
     path: 'deslizar',
     loadChildren: () => import('./deslizar/deslizar.module').then( m => m.DeslizarPageModule)
+  },  {
+    path: 'registrausuario',
+    loadChildren: () => import('./Admin/registrausuario/registrausuario.module').then( m => m.RegistrausuarioPageModule)
   }
+
 ];
 @NgModule({
   imports: [

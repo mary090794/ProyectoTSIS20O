@@ -1,16 +1,34 @@
 <ion-header>
   <ion-toolbar>
-  	<ion-buttons slot="start">
-  		<ion-back-button
-        style="padding-left: .4em"
-        text=""
-        defaultHref="/"
-      ></ion-back-button>
-      </ion-buttons>
-    <ion-title>Login para colaboradores</ion-title>
+    <ion-title>login</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-	<ion-button expand="block" fill="outline" (click)="muestraAdmin()">Iniciar Sesión</ion-button>
+  <ion-list class="ion-padding">
+    
+    <ion-item >
+      
+      <ion-label position="floating">Usuario</ion-label>
+      <ion-input #Usuario type="text" ></ion-input>
+    </ion-item> 
+
+    <ion-item  >
+      <!--Type ya hace la validacion-->
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input #Contrasena type="password" ></ion-input>
+    </ion-item>    
+
+    <ion-item>
+      <ion-button expand="full" (click)="Login(Usuario.value, Contrasena.value)">Ingresar</ion-button>
+    </ion-item>
+    <p class="registration-info">
+        Aun no te registras <span (click)="RegistraUsuario()" > Registrate </span>   
+    </p>
+
+  </ion-list>
+
+
+  
+
 </ion-content>
