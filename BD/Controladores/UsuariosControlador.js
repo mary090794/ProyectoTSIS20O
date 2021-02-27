@@ -3,7 +3,7 @@
 'use strict'
 
 var Usuario = require('../Modelos/Usuario');
-var nodemailer = require('../node_modules/nodemailer');
+//var nodemailer = require('../node_modules/nodemailer');
 
 var path = require('path');
 const { Console } = require('console');
@@ -96,13 +96,13 @@ var controller = {
 		});
 		
 
-		var transporter = nodemailer.createTransport({
+		/*var transporter = nodemailer.createTransport({
 			service: 'gmail',
 			auth: {
 				user: 'bellatrixacordes@gmail.com',
 				pass: 'Bellatrixuam20o'
 			}
-			});
+			});*/
 		
 		var mailOptions = {
 		from: 'bellatrixacordes@gmail.com',

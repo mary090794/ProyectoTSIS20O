@@ -36,7 +36,8 @@ export class LoginPage implements OnInit {
     console.log(this.usuario);
     console.log(contrasena);
    
-
+    this.muestraAdmin();
+    /*
     if (usuario !=""  &&  contrasena != "" ){      
 
       this.http.validaUsuario(usuario, contrasena).subscribe(
@@ -68,6 +69,7 @@ export class LoginPage implements OnInit {
 
       alert("campos obligatorios");
     }    
+  */
   }
 
    
