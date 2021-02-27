@@ -8,7 +8,7 @@ import { Cancion } from '../Interfaces/Cancion';
 export class HttpService {
 	//servidor = 'http://localhost:5000/'; // Local
 	//servidor = 'http://palancar.izt.uam.mx:4002/'; // Internet
-	servidor = 'http://palancar.izt.uam.mx:5000/'; // Internet
+	servidor = 'http://palancar.izt.uam.mx:4002/'; // Internet
 
 	constructor(public http: HttpClient) { }
 

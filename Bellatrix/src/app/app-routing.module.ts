@@ -31,9 +31,10 @@ const routes: Routes = [
     loadChildren: () => import('./Admin/editar-cancion/editar-cancion.module').then( m => m.EditarCancionPageModule)
   },
   {
-    path: 'deslizar',
+    path: 'deslizar/:id',
     loadChildren: () => import('./deslizar/deslizar.module').then( m => m.DeslizarPageModule)
-  },  {
+  },
+  {
     path: 'registrausuario',
     loadChildren: () => import('./Admin/registrausuario/registrausuario.module').then( m => m.RegistrausuarioPageModule)
   }
