@@ -19,15 +19,7 @@ export class AjustesCancionPage {
   lista = [];
   favoritos = []
   tipoActual = "";
-  cancion = {
-    "acordes":[],
-    "contenido":[],
-    "_id":"",
-    "nombre":"",
-    "artista":"",
-    "genero":"",
-    "tempo": 120
-  };
+  cancion: Cancion;
 
   tempos = [];
   tempo = 100;
