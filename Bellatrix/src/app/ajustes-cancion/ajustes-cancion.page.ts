@@ -5,9 +5,7 @@ import { ReceiverService } from '../servicios/receiver.service';
 import { Cancion } from '../Interfaces/Cancion';
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
-import { Toast } from '@capacitor/core';
 
 @Component({
   selector: 'app-ajustes-cancion',
@@ -44,7 +42,7 @@ export class AjustesCancionPage {
   link: string = null;
   subject:string = null;
 
-	constructor(public http: HttpService, private navCtrl: NavController, private receiber: ReceiverService, private barcodeScanner: BarcodeScanner, private socialSharing: SocialSharing, private base64ToGallery: Base64ToGallery) {
+	constructor(public http: HttpService, private navCtrl: NavController, private receiber: ReceiverService, private barcodeScanner: BarcodeScanner, private socialSharing: SocialSharing) {
     // Se recibe la cancion seleccionada
     this.receiber.$getListSource.subscribe(list => { this.cancion = list[0]; }).unsubscribe();
     for (var i = 50; i < 140; i++) {
@@ -88,21 +86,7 @@ export class AjustesCancionPage {
       }).catch(()=>{
 
       });
+
     }
-   /* downloadRQ(){
-      const canvas = document.querySelector('canvas') as HTMLCanvasElement;
-      const imageData = canvas.toDataURL('image/jpeg').toString();
-      console.log('data: ',imageData);
-      
-      let data= imageData.split(',')[1];
-      this.base64ToGallery.base64ToGallery(data,
-        { prefix: '_img', mediaScanner: true})
-        .then(async res =>{
-          let toast = await this.toastCtrl.create({
-            header: 'QR salvado en tu galeria XD'
-          });
-          toast.present();
-        }, err => console.log('err: ', err)
-        );  
-    }*/
+    
 }
