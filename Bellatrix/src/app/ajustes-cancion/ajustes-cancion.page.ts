@@ -56,8 +56,8 @@ export class AjustesCancionPage {
   }
 
     comenzar(){
-      //this.receiber.sendListSource([this.cancion]);
-      this.navCtrl.navigateForward(["deslizar", this.cancion._id]);
+      this.receiber.sendListSource([this.cancion]);
+      this.navCtrl.navigateForward("deslizar");
     }
 
     createCode () {

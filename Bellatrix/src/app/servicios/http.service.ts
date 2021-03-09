@@ -8,7 +8,11 @@ import { Cancion } from '../Interfaces/Cancion';
 export class HttpService {
 	servidor = 'http://localhost:5000/'; // Local
 	//servidor = 'http://palancar.izt.uam.mx:4002/'; // Internet
+<<<<<<< HEAD
 
+=======
+	servidor = 'http://palancar.izt.uam.mx:5000/'; // Internet
+>>>>>>> parent of 64677c7 (URL)
 
 	constructor(public http: HttpClient) { }
 

@@ -4,5 +4,4 @@ export interface Cancion {
     genero: String;
     tempo: Number;
     contenido: object;
-    _id: object;
 }
