@@ -11,6 +11,9 @@ import { AppComponent } from './app.component';
 
 import { HttpService } from './servicios/http.service';
 import { HttpClientModule } from '@angular/common/http';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +22,9 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, HttpService,
+    BarcodeScanner,
+    NgxQRCodeModule,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, HttpService, SocialSharing,
   ],
   bootstrap: [AppComponent]
 })

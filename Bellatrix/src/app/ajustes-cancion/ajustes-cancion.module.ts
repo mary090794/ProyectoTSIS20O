@@ -8,11 +8,17 @@ import { AjustesCancionPageRoutingModule } from './ajustes-cancion-routing.modul
 
 import { AjustesCancionPage } from './ajustes-cancion.page';
 
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { Base64ToGallery } from '@ionic-native/base64-to-gallery';
+
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    NgxQRCodeModule,
+    Base64ToGallery,
     AjustesCancionPageRoutingModule
   ],
   declarations: [AjustesCancionPage]
