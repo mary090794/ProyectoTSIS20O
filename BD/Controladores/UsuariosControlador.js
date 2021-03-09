@@ -4,6 +4,8 @@
 
 var Usuario = require('../Modelos/Usuario');
 var nodemailer = require('../node_modules/nodemailer');
+var Crypto = require('crypto');
+
 
 var path = require('path');
 const { Console } = require('console');
@@ -39,7 +41,7 @@ var controller = {
 		console.log(params.usuario);
 		console.log(params.contrasena);
 
-		Usuario.findOne().where({usuario: params.usuario,  pass: params.contrasena}).exec((err, usuarios) => {			
+		Usuario.findOne().where({usuario: params.usuario,  pass: params.contrasena, permisos: administrador}).exec((err, usuarios) => {			
 		
 			if(err)
 				return res.status(500).send({message: 'No hay usuarios.'});			
@@ -70,12 +72,19 @@ var controller = {
 
 	},
 	
+	generacontraseña: function randomString(size = 21) {  
+		return Crypto
+		  .randomBytes(size)
+		  .toString('base64')
+		  .slice(0, size)
+	  },
 
 	guardaUsuario: function(req, res){
 	
 
 		var newusuario = new Usuario();
 		var params = req.body;
+
 
 		console.log(params.usuario);
 		console.log(params.contrasena);

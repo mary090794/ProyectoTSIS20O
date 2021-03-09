@@ -11,8 +11,6 @@ import { HttpService } from '../../servicios/http.service';
 
 export class RegistrausuarioPage implements OnInit {
   
-
-
   constructor(public http: HttpService, private navCtrl: NavController) { }
 
   ngOnInit() {

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Cancion } from '../Interfaces/Cancion';
+import { type } from 'os';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,20 @@ export class HttpService {
 	constructor(public http: HttpClient) { }
 
 	// Obtiene las cancionres ordenadas respecto a un tipo
-	obtenerCanciones(tipo) {
-		return this.http.get(this.servidor + 'Canciones' + tipo);
+	obtenerCanciones(tipo,elemento) {	
+		
+			//elemento={"elemento" : elemento};
+		return this.http.get(this.servidor + 'Canciones' + tipo +'/'+ elemento);
 		//return this.http.get('http://palancar.izt.uam.mx:4002/Canciones' + tipo);
 	}
+
+	obtenerTodasCanciones(tipo) {
+		console.log(" servicio Todas");
+		console.log(tipo);
+		return this.http.get(this.servidor + 'CancionesTodas' + tipo);
+		//return this.http.get('http://palancar.izt.uam.mx:4002/Canciones' + tipo);
+	}
+
 
 	// Guarda una nueva cancion
 	guardarCancion(cancion){

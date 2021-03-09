@@ -13,7 +13,7 @@ var port = 5000; //puede cambiar
 mongoose.Promise = global.Promise;
  
 // Usamos el método connect para conectarnos a nuestra base de datos
-mongoose.connect('mongodb://localhost:27017/miBD', {useUnifiedTopology: true, useNewUrlParser: true})
+mongoose.connect('mongodb://localhost:27017/miDB', {useUnifiedTopology: true, useNewUrlParser: true})
     .then(() => {
 
         // Cuando se realiza la conexión, lanzamos este mensaje por consola

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpService } from '../servicios/http.service';
 import { NavController } from '@ionic/angular';
 import { ReceiverService } from '../servicios/receiver.service';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-tab1',
@@ -13,21 +14,20 @@ export class Tab1Page {
   lista = [];
   favoritos = []
   tipoActual = "";
+  elemento="";
 
 	constructor(public http: HttpService, private navCtrl: NavController, private receiber: ReceiverService) { 
     this.tipoActual = "Nombre";
-    this.cargarCanciones(this.tipoActual);    
+    this.elemento="";
+    this.cargarTodasCanciones(this.tipoActual);    
   }
 
     // Obtiene de la BD la lista ordenada por el tipo
-    cargarCanciones(tipo){
-      this.http.obtenerCanciones(tipo).subscribe(
+    cargarTodasCanciones(tipo){
+      this.http.obtenerTodasCanciones(tipo).subscribe(
         (res: any) => {
-
-          this.lista = res.canciones;
-          console.log(res.canciones)
-          this.favoritos.push(res.canciones[0]); // Cancion favorita de prueba
-       
+          this.lista = res.canciones;         
+          //this.favoritos.push(res.canciones[0]); // Cancion favorita de prueba       
         },
         (error) =>{
           console.error(error);
@@ -35,29 +35,40 @@ export class Tab1Page {
       );
     }
 
-  	// Barra de busqueda
-  	buscar($event){
-  		// Si no hay texto, muestra todo el playlist
-  		if($event.target.value == ""){
-  			this.cargarCanciones(this.tipoActual);
-  		}else{ // Se muestran las coicidencias del texto
-  			// LAS COINCIDENCIAS LAS OBENETEMOS DE LA CONSULTA DEL MONGO
-	  		this.lista = [
-		  		{
-		  			"nombre": "buscando",
-		  			"artista": "buscando"
-		  		}
-	  		]
+  // Obtiene de la BD la lista ordenada por el tipo
+  cargarCanciones(tipo,elemento){
+    this.http.obtenerCanciones(tipo,elemento).subscribe(
+      (res: any) => {
+        this.lista = res.canciones;        
+        //this.favoritos.push(res.canciones[0]); // Cancion favorita de prueba      
+      },
+      (error) =>{
+        console.error(error);
+      }
+    );
+  }
+
+  	// Barra de busqueda 
+  	buscar($event){  	
+      this.elemento=$event.target.value;
+      console.log("evento");
+      console.log($event.target.value);
+  		if(this.elemento == "" || null){
+        this.tipoActual="Nombre";
+  			this.cargarTodasCanciones(this.tipoActual);
+  		}else{ 
+         
+        this.cargarCanciones(this.tipoActual,this.elemento);
+	  	
   		}
   	}
 
-  	// Recibe el evento de seleccionar el ordenamiento
-  	ordenarPor($event){
-  		// LA ORDENACION SE REALIZA CON UNA CONSULTA DE MONGO
+  	// Recibe el evento de seleccionar el ordenamiento y filtrado
+  	ordenarPor($event){  		
       let tipo = $event.target.value;
       tipo = tipo[0].toUpperCase() + tipo.slice(1);
       this.tipoActual = tipo;
-  		this.cargarCanciones(tipo);
+  		this.cargarCanciones(tipo,this.elemento);
   	}
 
     // Agrega la cancion seleccionada a favoritos
@@ -85,7 +96,6 @@ export class Tab1Page {
 
       return false;
     }
-
 
     mostrarAjustes(cancion){
       this.receiber.sendListSource([cancion]);

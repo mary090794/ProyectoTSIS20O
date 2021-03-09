@@ -5,6 +5,7 @@
 var Cancion = require('../Modelos/Cancion');
 //var fs = require('fs');
 var path = require('path');
+const { Console } = require('console');
 
 var controller = {
 	
@@ -16,9 +17,10 @@ var controller = {
 
 	obtenerCancionesPorArtista: function(req, res){
 
-		Cancion.find({}).sort({artista: 1}).exec((err, canciones) => {
-			
-			console.log(canciones);
+		var param = req.params;		
+		var  buscar = param.elemento;	
+
+		Cancion.find({artista: new RegExp(buscar, "i")}).sort({artista: 1}).exec((err, canciones) => {			
 
 			if(err)
 				return res.status(500).send({message: 'Error al devolver los datos.'});
@@ -32,10 +34,11 @@ var controller = {
 	},
 
 	obtenerCancionesPorGenero: function(req, res){
+		
+		var param = req.params;		
+		var  buscar = param.elemento;	
 
-		Cancion.find({}).sort({genero: 1}).exec((err, canciones) => {
-			
-			console.log(canciones);
+		Cancion.find({genero: new RegExp(buscar, "i")}).sort({genero: 1}).exec((err, canciones) => {
 
 			if(err)
 				return res.status(500).send({message: 'Error al devolver los datos.'});
@@ -49,11 +52,27 @@ var controller = {
 	},
 
 	obtenerCancionesPorNombre: function(req, res){
+		
+		var param = req.params;		
+		var  buscar = param.elemento;	
+
+		Cancion.find({nombre: new RegExp(buscar, "i")}).sort({nombre: 1}).exec((err, canciones) => {
+
+			if(err)
+				return res.status(500).send({message: 'Error al devolver los datos.'});
+
+			if(!canciones)
+				return res.status(404).send({message: 'No hay projectos que mostrar.'});
+
+			return res.status(200).send({canciones});
+		});
+
+	},
+
+	obtenerTodasCancionesPorNombre: function(req, res){	
 
 		Cancion.find({}).sort({nombre: 1}).exec((err, canciones) => {
-			
-			console.log(canciones);
-
+		
 			if(err)
 				return res.status(500).send({message: 'Error al devolver los datos.'});
 
